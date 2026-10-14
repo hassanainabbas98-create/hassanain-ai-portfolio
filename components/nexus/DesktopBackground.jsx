@@ -68,32 +68,8 @@ function Airplane({ size = 52, color = '#FF6D5A', shadow = '#E25542' }) {
 
 /* ─── Node card ──────────────────────────────────────────────────────────── */
 function WorkflowNode({ node }) {
-  const [pulse, setPulse] = useState(false);
-  useEffect(() => {
-    const t = setInterval(() => {
-      setPulse(true);
-      setTimeout(() => setPulse(false), 600);
-    }, Math.random() * 3000 + 2000);
-    return () => clearInterval(t);
-  }, []);
-
   return (
-    <motion.g
-      initial={{ opacity: 0, scale: 0.7 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ delay: 0.05 * NODES.indexOf(node), duration: 0.5, ease: 'backOut' }}
-    >
-      {/* Glow ring on pulse */}
-      {pulse && (
-        <circle
-          cx={node.x + 54}
-          cy={node.y + 22}
-          r="34"
-          fill={node.color}
-          opacity="0.12"
-        />
-      )}
-
+    <g>
       {/* Card background */}
       <rect
         x={node.x}
@@ -103,8 +79,8 @@ function WorkflowNode({ node }) {
         rx="10"
         fill="white"
         stroke={node.border}
-        strokeWidth="1.8"
-        strokeOpacity={pulse ? 1 : 0.5}
+        strokeWidth="1.6"
+        strokeOpacity="0.7"
         filter="url(#nodeBlur)"
       />
 
@@ -136,12 +112,8 @@ function WorkflowNode({ node }) {
       </text>
 
       {/* Status dot */}
-      <circle cx={node.x + 100} cy={node.y + 10} r="4" fill="#10B981" opacity={pulse ? 1 : 0.6}>
-        {pulse && (
-          <animate attributeName="r" values="4;7;4" dur="0.6s" />
-        )}
-      </circle>
-    </motion.g>
+      <circle cx={node.x + 100} cy={node.y + 10} r="4" fill="#10B981" opacity="0.8" />
+    </g>
   );
 }
 
@@ -162,9 +134,6 @@ export default function DesktopBackground() {
           backgroundSize: '32px 32px',
         }}
       />
-
-      {/* ── 4th Dimension Cosmic n8n Hyperspace Canvas ── */}
-      <FourthDimensionCanvas opacity={0.4} />
 
       {/* ── Large ambient glows ── */}
       <div className="absolute -top-40 -left-40 w-[700px] h-[700px] rounded-full bg-gradient-to-br from-[#FF6D5A]/12 via-[#8B5CF6]/8 to-transparent blur-3xl" />
@@ -372,7 +341,7 @@ export default function DesktopBackground() {
         initial={{ opacity: 0, x: 60 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ delay: 1.2, duration: 0.8, ease: 'backOut' }}
-        className="absolute bottom-24 right-6 z-10 pointer-events-none"
+        className="absolute bottom-24 right-6 z-10 pointer-events-none hidden md:block"
         style={{ width: 210 }}
       >
         <div

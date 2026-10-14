@@ -141,7 +141,7 @@ export default function N8nCanvasWindow() {
   const selectedNodeData = nodes.find((n) => n.id === activeNode) || nodes[2];
 
   return (
-    <div className="flex flex-col h-full bg-[#FFFFFF] font-sans text-xs select-text overflow-hidden">
+    <div className="flex-1 overflow-y-auto h-full bg-[#FFFFFF] font-sans text-xs select-text overscroll-contain">
       
       {/* n8n Top Navigation Bar */}
       <div className="p-3 bg-[#FFFFFF] border-b border-slate-200 flex items-center justify-between text-xs shrink-0 shadow-sm">
@@ -323,7 +323,7 @@ export default function N8nCanvasWindow() {
       </div>
 
       {/* Featured Projects Real-World Executions */}
-      <div className="p-5 overflow-y-auto flex-1 space-y-4 bg-[#FAFAFA]">
+      <div className="p-4 sm:p-5 space-y-4 bg-[#FAFAFA]">
         <div className="flex items-center justify-between">
           <span className="text-xs font-bold text-slate-700 uppercase tracking-wider font-mono">
             Verified Production Workflows (Featured Projects):

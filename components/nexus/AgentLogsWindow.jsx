@@ -36,10 +36,10 @@ export default function AgentLogsWindow({ onOpenContact }) {
   const [avatarSrc, setAvatarSrc] = useState('/assets/images/profile.jpg');
 
   return (
-    <div className="flex flex-col h-full bg-white font-mono text-xs select-text overflow-hidden">
+    <div className="flex-1 overflow-y-auto h-full bg-white font-mono text-xs select-text overscroll-contain">
       
       {/* Top Main Section (Hero with 4th Dimension Cosmic n8n Hyperspace Background) */}
-      <div className="relative p-5 sm:p-7 grid grid-cols-1 md:grid-cols-12 gap-6 items-center border-b border-slate-200 overflow-hidden bg-gradient-to-br from-white/95 via-[#FAF5FF]/75 to-[#FFF7F5]/85">
+      <div className="relative p-4 sm:p-7 grid grid-cols-1 md:grid-cols-12 gap-6 items-center border-b border-slate-200 overflow-hidden bg-gradient-to-br from-white/95 via-[#FAF5FF]/75 to-[#FFF7F5]/85">
         
         {/* 4th Dimension Interactive Hyperspace Canvas */}
         <FourthDimensionCanvas opacity={0.92} />
@@ -157,7 +157,7 @@ export default function AgentLogsWindow({ onOpenContact }) {
       </div>
 
       {/* Bottom: Real-Time Scrolling Terminal Logs */}
-      <div className="p-4 bg-slate-50 flex-1 overflow-y-auto space-y-1.5 font-mono text-[11px] border-t border-slate-200">
+      <div className="p-4 bg-slate-50 space-y-1.5 font-mono text-[11px] border-t border-slate-200">
         <div className="text-[10px] text-slate-400 uppercase tracking-widest mb-1 flex items-center gap-2">
           <Terminal className="w-3 h-3 text-[#FF6D5A]" />
           <span>LIVE AGENT EVENT STREAM (STDOUT):</span>

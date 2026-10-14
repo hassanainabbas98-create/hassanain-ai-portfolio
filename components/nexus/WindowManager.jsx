@@ -94,15 +94,15 @@ export default function WindowManager({
             onMouseDown={() => onFocusWindow(winId)}
             className={`fixed pointer-events-auto transition-all duration-200 ${
               winState.isMaximized
-                ? 'inset-2 sm:inset-4 top-11 bottom-20 max-w-none w-auto h-auto'
-                : `w-[95vw] sm:w-full ${config.defaultWidth} ${config.defaultHeight} max-h-[82vh] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2`
+                ? 'inset-2 sm:inset-4 top-10 sm:top-11 bottom-16 sm:bottom-20 max-w-none w-auto h-auto'
+                : `inset-2 sm:inset-auto top-10 sm:top-1/2 sm:left-1/2 sm:-translate-x-1/2 sm:-translate-y-1/2 bottom-16 sm:bottom-auto w-auto sm:w-full ${config.defaultWidth} h-auto sm:${config.defaultHeight} sm:max-h-[84vh]`
             }`}
           >
             <motion.div
               initial={{ opacity: 0, scale: 0.95, y: 15 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 10 }}
-              drag={!winState.isMaximized}
+              drag={!winState.isMaximized && typeof window !== 'undefined' && window.innerWidth >= 640}
               dragMomentum={false}
               dragElastic={0}
               className={`w-full h-full flex flex-col rounded-2xl bg-white/95 backdrop-blur-2xl border transition-shadow duration-300 overflow-hidden shadow-2xl ${

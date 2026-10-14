@@ -92,14 +92,14 @@ export default function Dock({ windows, onToggleWindow }) {
   ];
 
   return (
-    <div className="fixed bottom-3 left-0 right-0 z-40 flex justify-center pointer-events-none px-4">
-      <div className="pointer-events-auto flex items-center gap-2 sm:gap-2.5 px-3.5 sm:px-4 py-2.5 rounded-2xl bg-white/90 backdrop-blur-2xl border border-slate-200/90 shadow-[0_15px_40px_rgba(15,23,42,0.12)]">
+    <div className="fixed bottom-2 sm:bottom-3 left-0 right-0 z-40 flex justify-center pointer-events-none px-2 sm:px-4">
+      <div className="pointer-events-auto flex items-center gap-1 sm:gap-2.5 px-2 sm:px-4 py-1.5 sm:py-2.5 rounded-2xl bg-white/95 backdrop-blur-2xl border border-slate-200/90 shadow-[0_15px_40px_rgba(15,23,42,0.12)] max-w-[98vw] overflow-x-auto">
         {apps.map((item, idx) => {
           if (item.isDivider) {
             return (
               <div
                 key={`divider-${idx}`}
-                className="w-[1px] h-8 bg-slate-200 mx-1 hidden sm:block"
+                className="w-[1px] h-6 sm:h-8 bg-slate-200 mx-0.5 sm:mx-1 hidden sm:block shrink-0"
               />
             );
           }
@@ -111,7 +111,7 @@ export default function Dock({ windows, onToggleWindow }) {
           return (
             <div
               key={item.id}
-              className="relative flex flex-col items-center"
+              className="relative flex flex-col items-center shrink-0"
               onMouseEnter={() => setHoveredApp(item.id)}
               onMouseLeave={() => setHoveredApp(null)}
             >
@@ -122,7 +122,7 @@ export default function Dock({ windows, onToggleWindow }) {
                     initial={{ opacity: 0, y: 10, scale: 0.9 }}
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     exit={{ opacity: 0, y: 5, scale: 0.9 }}
-                    className="absolute -top-10 px-2.5 py-1 rounded-lg bg-slate-900 text-white text-[11px] font-sans font-medium shadow-xl z-50 pointer-events-none whitespace-nowrap"
+                    className="absolute -top-10 px-2.5 py-1 rounded-lg bg-slate-900 text-white text-[11px] font-sans font-medium shadow-xl z-50 pointer-events-none whitespace-nowrap hidden sm:block"
                   >
                     {item.tooltip}
                   </motion.div>
@@ -135,20 +135,20 @@ export default function Dock({ windows, onToggleWindow }) {
                   href={item.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl flex items-center justify-center bg-slate-50 hover:bg-slate-100 text-slate-700 hover:text-slate-900 border border-slate-200/80 transition-all hover:scale-115 active:scale-95 shadow-sm"
+                  className="w-8 h-8 sm:w-11 sm:h-11 rounded-lg sm:rounded-xl flex items-center justify-center bg-slate-50 hover:bg-slate-100 text-slate-700 hover:text-slate-900 border border-slate-200/80 transition-all hover:scale-110 active:scale-95 shadow-sm shrink-0"
                 >
-                  <Icon className="w-5 h-5" style={{ color: item.color }} />
+                  <Icon className="w-4 h-4 sm:w-5 sm:h-5" style={{ color: item.color }} />
                 </a>
               ) : (
                 <button
                   onClick={() => onToggleWindow(item.id)}
-                  className={`w-10 h-10 sm:w-11 sm:h-11 rounded-xl flex items-center justify-center transition-all hover:scale-115 active:scale-95 ${
+                  className={`w-8 h-8 sm:w-11 sm:h-11 rounded-lg sm:rounded-xl flex items-center justify-center transition-all hover:scale-110 active:scale-95 shrink-0 ${
                     isWindowOpen && !isWindowMinimized
                       ? 'bg-slate-100 border-2 border-[#FF6D5A] shadow-md'
                       : 'bg-slate-50 hover:bg-slate-100 border border-slate-200/80 shadow-sm'
                   }`}
                 >
-                  <Icon className="w-5 h-5" style={{ color: item.color }} />
+                  <Icon className="w-4 h-4 sm:w-5 sm:h-5" style={{ color: item.color }} />
                 </button>
               )}
 

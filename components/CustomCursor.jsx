@@ -1,83 +1,89 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
+import { useEffect, useRef } from 'react';
 
 export default function CustomCursor() {
-  const [mousePosition, setMousePosition] = useState({ x: -100, y: -100 });
-  const [isHovered, setIsHovered] = useState(false);
-  const [isVisible, setIsVisible] = useState(false);
+  const dotRef = useRef(null);
+  const ringRef = useRef(null);
 
   useEffect(() => {
-    // Only enable on non-touch devices
-    if (window.matchMedia('(pointer: coarse)').matches) return;
+    // Disable completely on touch devices / mobile
+    if (typeof window === 'undefined' || window.matchMedia('(pointer: coarse)').matches) return;
 
-    const handleMouseMove = (e) => {
-      setMousePosition({ x: e.clientX, y: e.clientY });
-      if (!isVisible) setIsVisible(true);
+    const dot = dotRef.current;
+    const ring = ringRef.current;
+    if (!dot || !ring) return;
+
+    let mouseX = -100;
+    let mouseY = -100;
+    let ringX = -100;
+    let ringY = -100;
+    let isHovered = false;
+    let animId;
+
+    const onMouseMove = (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      dot.style.transform = `translate3d(${mouseX - 4}px, ${mouseY - 4}px, 0)`;
     };
 
-    const handleMouseOver = (e) => {
+    const onMouseOver = (e) => {
+      const target = e.target;
       if (
-        e.target.tagName === 'BUTTON' ||
-        e.target.tagName === 'A' ||
-        e.target.closest('button') ||
-        e.target.closest('a') ||
-        e.target.getAttribute('role') === 'button'
+        target.tagName === 'BUTTON' ||
+        target.tagName === 'A' ||
+        target.closest('button') ||
+        target.closest('a')
       ) {
-        setIsHovered(true);
-      } else {
-        setIsHovered(false);
+        if (!isHovered) {
+          isHovered = true;
+          ring.style.width = '42px';
+          ring.style.height = '42px';
+          ring.style.borderColor = '#FF6D5A';
+          ring.style.backgroundColor = 'rgba(255, 109, 90, 0.08)';
+        }
+      } else if (isHovered) {
+        isHovered = false;
+        ring.style.width = '28px';
+        ring.style.height = '28px';
+        ring.style.borderColor = 'rgba(255, 109, 90, 0.4)';
+        ring.style.backgroundColor = 'transparent';
       }
     };
 
-    const handleMouseLeave = () => {
-      setIsVisible(false);
+    // Smooth lerp on ring using requestAnimationFrame
+    const loop = () => {
+      ringX += (mouseX - ringX) * 0.22;
+      ringY += (mouseY - ringY) * 0.22;
+      const offset = isHovered ? 21 : 14;
+      ring.style.transform = `translate3d(${ringX - offset}px, ${ringY - offset}px, 0)`;
+      animId = requestAnimationFrame(loop);
     };
 
-    window.addEventListener('mousemove', handleMouseMove);
-    window.addEventListener('mouseover', handleMouseOver);
-    document.addEventListener('mouseleave', handleMouseLeave);
+    window.addEventListener('mousemove', onMouseMove, { passive: true });
+    window.addEventListener('mouseover', onMouseOver, { passive: true });
+    animId = requestAnimationFrame(loop);
 
     return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('mouseover', handleMouseOver);
-      document.removeEventListener('mouseleave', handleMouseLeave);
+      window.removeEventListener('mousemove', onMouseMove);
+      window.removeEventListener('mouseover', onMouseOver);
+      cancelAnimationFrame(animId);
     };
-  }, [isVisible]);
-
-  if (!isVisible) return null;
+  }, []);
 
   return (
     <div className="pointer-events-none fixed inset-0 z-50 overflow-hidden hidden md:block">
-      {/* Outer Glowing Ring */}
-      <motion.div
-        className="fixed top-0 left-0 rounded-full border border-[#00D1FF]/60 pointer-events-none"
-        animate={{
-          x: mousePosition.x - (isHovered ? 24 : 16),
-          y: mousePosition.y - (isHovered ? 24 : 16),
-          width: isHovered ? 48 : 32,
-          height: isHovered ? 48 : 32,
-          backgroundColor: isHovered ? 'rgba(0, 209, 255, 0.12)' : 'rgba(122, 92, 250, 0.05)',
-          borderColor: isHovered ? '#00D1FF' : 'rgba(0, 209, 255, 0.4)',
-        }}
-        transition={{ type: 'spring', damping: 25, stiffness: 350, mass: 0.5 }}
-        style={{
-          boxShadow: isHovered
-            ? '0 0 20px rgba(0, 209, 255, 0.5), inset 0 0 10px rgba(122, 92, 250, 0.4)'
-            : '0 0 10px rgba(0, 209, 255, 0.2)',
-        }}
+      {/* Outer Smooth Ring */}
+      <div
+        ref={ringRef}
+        className="fixed top-0 left-0 rounded-full border border-[#FF6D5A]/40 pointer-events-none transition-[width,height,border-color,background-color] duration-150 will-change-transform"
+        style={{ width: '28px', height: '28px', transform: 'translate3d(-100px, -100px, 0)' }}
       />
-
       {/* Center Precision Dot */}
-      <motion.div
-        className="fixed top-0 left-0 w-2 h-2 rounded-full bg-[#00D1FF] pointer-events-none shadow-[0_0_8px_#00D1FF]"
-        animate={{
-          x: mousePosition.x - 4,
-          y: mousePosition.y - 4,
-          scale: isHovered ? 1.5 : 1,
-        }}
-        transition={{ type: 'spring', damping: 35, stiffness: 800 }}
+      <div
+        ref={dotRef}
+        className="fixed top-0 left-0 w-2 h-2 rounded-full bg-[#FF6D5A] pointer-events-none shadow-[0_0_8px_#FF6D5A] will-change-transform"
+        style={{ transform: 'translate3d(-100px, -100px, 0)' }}
       />
     </div>
   );
