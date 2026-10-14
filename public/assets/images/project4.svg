@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="100%" height="100%">
+  <defs>
+    <linearGradient id="gwBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b1329" />
+      <stop offset="100%" stop-color="#050811" />
+    </linearGradient>
+    <linearGradient id="glowG" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#10b981" />
+      <stop offset="100%" stop-color="#06b6d4" />
+    </linearGradient>
+  </defs>
+
+  <rect width="800" height="450" fill="url(#gwBg)" rx="16" />
+
+  <!-- Network Diagram Topology -->
+  <g stroke="rgba(255,255,255,0.12)" stroke-width="2" stroke-dasharray="6,4">
+    <!-- Client to Gateway -->
+    <line x1="160" y1="225" x2="350" y2="225" />
+    <!-- Gateway to Services -->
+    <line x1="450" y1="225" x2="620" y2="120" />
+    <line x1="450" y1="225" x2="620" y2="225" />
+    <line x1="450" y1="225" x2="620" y2="330" />
+  </g>
+
+  <!-- Incoming Traffic Node -->
+  <rect x="60" y="180" width="100" height="90" rx="12" fill="#1e293b" stroke="rgba(255,255,255,0.1)" />
+  <circle cx="110" cy="210" r="14" fill="#38bdf8" />
+  <text x="75" y="245" fill="#f8fafc" font-family="sans-serif" font-size="11" font-weight="bold">Clients / Web</text>
+  <text x="80" y="260" fill="#38bdf8" font-family="monospace" font-size="9">HTTPS :443</text>
+
+  <!-- Gateway Central Hub -->
+  <rect x="330" y="150" width="150" height="150" rx="16" fill="#0f172a" stroke="url(#glowG)" stroke-width="2" />
+  <rect x="350" y="170" width="110" height="24" rx="6" fill="#10b981" opacity="0.2" />
+  <text x="365" y="186" fill="#34d399" font-family="sans-serif" font-size="10" font-weight="bold">HYPERGATE</text>
+  <text x="350" y="220" fill="#f8fafc" font-family="sans-serif" font-size="12" font-weight="bold">Rate Limiter &amp;</text>
+  <text x="350" y="238" fill="#f8fafc" font-family="sans-serif" font-size="12" font-weight="bold">SSL Proxy</text>
+  <rect x="350" y="255" width="110" height="18" rx="4" fill="#334155" />
+  <text x="362" y="268" fill="#a5f3fc" font-family="monospace" font-size="9">18,240 req/s</text>
+
+  <!-- Target Microservices -->
+  <!-- Service 1 -->
+  <rect x="620" y="80" width="120" height="75" rx="10" fill="#1e293b" stroke="rgba(255,255,255,0.08)" />
+  <text x="635" y="110" fill="#f8fafc" font-family="sans-serif" font-size="11" font-weight="bold">Auth Service</text>
+  <text x="635" y="130" fill="#34d399" font-family="monospace" font-size="9">● HEALTHY (2ms)</text>
+
+  <!-- Service 2 -->
+  <rect x="620" y="187" width="120" height="75" rx="10" fill="#1e293b" stroke="rgba(255,255,255,0.08)" />
+  <text x="635" y="217" fill="#f8fafc" font-family="sans-serif" font-size="11" font-weight="bold">Billing Engine</text>
+  <text x="635" y="237" fill="#34d399" font-family="monospace" font-size="9">● HEALTHY (4ms)</text>
+
+  <!-- Service 3 -->
+  <rect x="620" y="295" width="120" height="75" rx="10" fill="#1e293b" stroke="rgba(255,255,255,0.08)" />
+  <text x="635" y="325" fill="#f8fafc" font-family="sans-serif" font-size="11" font-weight="bold">Search Cluster</text>
+  <text x="635" y="345" fill="#34d399" font-family="monospace" font-size="9">● HEALTHY (3ms)</text>
+</svg>

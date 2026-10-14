@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="100%" height="100%">
+  <defs>
+    <linearGradient id="ecomBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#090d16" />
+      <stop offset="100%" stop-color="#111827" />
+    </linearGradient>
+    <linearGradient id="neonGlow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f43f5e" />
+      <stop offset="100%" stop-color="#fb923c" />
+    </linearGradient>
+  </defs>
+
+  <rect width="800" height="450" fill="url(#ecomBg)" rx="16" />
+
+  <!-- Navbar Mockup -->
+  <rect x="40" y="30" width="720" height="50" rx="10" fill="#1e293b" opacity="0.7" />
+  <circle cx="75" cy="55" r="14" fill="#6366f1" />
+  <rect x="105" y="48" width="80" height="14" rx="4" fill="#f8fafc" />
+  <rect x="220" y="50" width="45" height="10" rx="3" fill="#64748b" />
+  <rect x="280" y="50" width="55" height="10" rx="3" fill="#64748b" />
+  <rect x="350" y="50" width="50" height="10" rx="3" fill="#64748b" />
+  <rect x="620" y="44" width="120" height="22" rx="6" fill="#6366f1" opacity="0.8" />
+  <text x="650" y="59" fill="#ffffff" font-family="sans-serif" font-size="11" font-weight="bold">Cart (3)</text>
+
+  <!-- Hero Banner in App -->
+  <rect x="40" y="100" width="720" height="120" rx="12" fill="url(#neonGlow)" opacity="0.2" stroke="rgba(255,255,255,0.1)" />
+  <text x="70" y="145" fill="#ffffff" font-family="sans-serif" font-weight="bold" font-size="20">Next-Gen Mechanical Keyboards</text>
+  <text x="70" y="170" fill="#cbd5e1" font-family="sans-serif" font-size="13">Custom CNC aluminum cases with wireless tri-mode latency under 1ms.</text>
+  <rect x="70" y="185" width="110" height="24" rx="6" fill="#ffffff" />
+  <text x="95" y="201" fill="#0f172a" font-family="sans-serif" font-size="11" font-weight="bold">Shop Collection</text>
+
+  <!-- Product Cards Grid -->
+  <g transform="translate(40, 240)">
+    <!-- Card 1 -->
+    <rect x="0" y="0" width="225" height="175" rx="10" fill="#1e293b" stroke="rgba(255,255,255,0.08)" />
+    <rect x="15" y="15" width="195" height="85" rx="8" fill="#0f172a" />
+    <rect x="50" y="40" width="125" height="35" rx="6" fill="#3b82f6" opacity="0.6" />
+    <rect x="15" y="115" width="120" height="12" rx="3" fill="#f8fafc" />
+    <rect x="15" y="135" width="60" height="10" rx="3" fill="#38bdf8" />
+    <rect x="160" y="130" width="50" height="22" rx="5" fill="#6366f1" />
+    <text x="175" y="145" fill="#fff" font-family="sans-serif" font-size="10">$189</text>
+
+    <!-- Card 2 -->
+    <rect x="247" y="0" width="225" height="175" rx="10" fill="#1e293b" stroke="rgba(255,255,255,0.08)" />
+    <rect x="262" y="15" width="195" height="85" rx="8" fill="#0f172a" />
+    <circle cx="360" cy="57" r="28" fill="#ec4899" opacity="0.6" />
+    <rect x="262" y="115" width="130" height="12" rx="3" fill="#f8fafc" />
+    <rect x="262" y="135" width="70" height="10" rx="3" fill="#38bdf8" />
+    <rect x="407" y="130" width="50" height="22" rx="5" fill="#6366f1" />
+    <text x="422" y="145" fill="#fff" font-family="sans-serif" font-size="10">$249</text>
+
+    <!-- Card 3 -->
+    <rect x="495" y="0" width="225" height="175" rx="10" fill="#1e293b" stroke="rgba(255,255,255,0.08)" />
+    <rect x="510" y="15" width="195" height="85" rx="8" fill="#0f172a" />
+    <polygon points="607,35 635,80 580,80" fill="#10b981" opacity="0.6" />
+    <rect x="510" y="115" width="110" height="12" rx="3" fill="#f8fafc" />
+    <rect x="510" y="135" width="55" height="10" rx="3" fill="#38bdf8" />
+    <rect x="655" y="130" width="50" height="22" rx="5" fill="#6366f1" />
+    <text x="670" y="145" fill="#fff" font-family="sans-serif" font-size="10">$129</text>
+  </g>
+</svg>
